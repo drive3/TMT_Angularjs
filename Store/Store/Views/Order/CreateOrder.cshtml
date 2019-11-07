@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "CreateOrder";
+    Layout = null;
+}
+<style>
+    .ex1 {
+        width: 400px;
+        height: 600px;
+        overflow: scroll;
+    }
+    .ex2 {
+        width: 600px;
+        height: 600px;
+        overflow: scroll;
+    }
+</style>
+<div ng-controller="OrderController as vm">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand" ui-sref="listorder">ListOrderDetail</a>
+        </div>
+    </nav>
+    <div class="col-md-0"></div>
+    <div class="col-md-12 well">
+        @*as vm*@
+        <h3 class="text-primary">Sống Là Phải Có Đam Mê</h3>
+        <hr style="border-top:1px dotted #ccc;" />
+        <div id="bg-background" class="col-md-5">
+            <br />
+            <p> <b> Filtering Input: </b><input type="text" ng-model="search.query" placeholder="Search By Name, Price"></p>
+
+            <br />
+            <div class="ex1">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        @*<th class="qty">Qty</th>
+                        <th>Total</th>*@
+                    </tr>
+                    <tr ng-click="vm.addItem(item)" class="animate-repeat" ng-repeat="item in vm.products |   xf:search:['Price', 'Name'] ">
+                        <td>{{ item.Name }}</td>
+                        <td>{{ item.Price | currency : "" : 0  }} VNĐ</td>
+                        @*<td><input kendo-numeric-text-box class="qty" k-min="1" k-max="10" k-ng-model="value" style="width: 10%;" /></td>*@
+                        @*<td><input type="number" value="1" ng-model="item.qty" class="qty" min="1" style="width: 50px"></td>
+                        <td>{{ item.qty * item.Price | currency : "" : 0  }} VNĐ</td>*@
+                        @*<td>
+                            <button class="btn-primary" ng-click="vm.addItem(item)">Add to Cart</button>
+                        </td>*@
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="pull-right col-md-7">
+            @*<div class="row">
+                    <h2>Your Cart:</h2>
+                    <ul>
+                        <li class="animate-repeat" ng-repeat="item in cart | orderBy:'category'">
+                            <span>{{ item.qty + ' x ' + item.Name + ' = ' + (getCost(item) | currency) }}</span>
+                            <button class="btn-danger btn-xs" ng-click="removeItem(item);">Remove Item</button>
+
+                        </li>
+                    </ul>
+                    <h3>Total: {{ getTotal() | currency }}</h3>
+                    <button class="btn-danger" ng-click="clearCart();">Clear Cart</button>
+                </div>*@
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Customer : <select kendo-combo-box
+                                       k-placeholder="'Select Customer'"
+                                       k-data-text-field="'Name'"
+                                       k-data-value-field="'Id'"
+                                       k-filter="'contains'"
+                                       k-auto-bind="false"
+                                       k-data-source="vm.productsDataSource"
+                                       style="width: 30%"
+                                       k-value-primitive="true"
+                                       k-ng-model="vm.order.CustomerId">
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label align="right"> Date : <input kendo-date-picker ng-model="vm.order.orderDate" /></label>
+
+                </div>
+                <div class="ex2">
+                    <div class="panel-body table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th>Product</th>
+                                    <th style="width: 0px">Qty</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in vm.order.Items">
+                                    <td>{{item.ProductName}}</td>
+                                    <td><input type="number" value="1" ng-model="item.Quantiy" class="qty" min="1" style="width: 50px"></td>
+                                    <td>{{ item.Quantiy * item.Price | currency : "" : 0  }} VNĐ</td>
+
+                                    <td><button type="button" ng-click="vm.removeItem(item);" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right"><b>Quantity :</b></td>
+                                    <td>{{vm.qty()}}</td>
+                                    <td>{{ vm.getTotal() | currency : "" : 0  }} VNĐ</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <span id="save" class="btn btn-success margin-right-btn" ng-click="vm.SaveOrderProduct()" style="margin: 5px">
+                    <i class="icon-save"></i>{{vm.btnText}}
+                </span>
+                <button class="btn btn-danger" ng-click="vm.clearCart()">Clear Cart</button>
+            </div>
+
+        </div>
+        @*{{vm.order}}*@
+    </div>
+</div>

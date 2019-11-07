@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "ListCatelogy";
+    Layout = null;
+}
+<div ng-app="myapp">
+    <div ng-controller="CatelogyCtrl as vm">
+      
+        <h2>Danh Sách Danh Mục</h2>
+
+        <form novalidate name="frmStudent" id="frmStudent" class="form-horizontal row-border">
+            <br />
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> Name</label>
+                    <div class="col-md-7"> <input type="text" id="idName" class="form-control" name="nameName" ng-model="vm.Name" /> </div>
+                </div>
+               
+              
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17">Description</label>
+                    <div class="col-md-7"> <input type="text" id="idDescription" class="form-control" name="nameDescription" ng-model="vm.Description" /> </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-4"> </div>
+                    <div class="col-md-7">
+                        <span id="save" class="btn btn-success margin-right-btn" @*ui-sref="listproduct"*@ ng-click="vm.SaveUpdate()">
+                            <i class="icon-save"></i>{{vm.btnText}}
+                        </span>
+                        <a class="btn btn-danger" ng-click=" vm.Clear()">Clear</a>
+                        <a ui-sref="CreateProduct" class="btn btn-default">Add Product</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr />
+        <p>Search: <input type="text" ng-model="dataModel.Name"></p>
+        <table ng-table="vm.tableParams" cellpadding="10" class="table table-bordered table-hover" show-filter="false">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th>STT</th>
+                    <th>Name</th>                 
+                    <th>Decripton</th>
+                    <th>DateCreated</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dataModel in $data | filter: dataModel.Name">
+                    <td>{{$index + 1}}</td>
+                    <td> {{dataModel.Name}}</td>
+                    <td>{{dataModel.Description}}</td>
+                    <td>{{dataModel.Date | date:'M/d/yyyy '}}</td>
+                    <td>
+                        @*<a ui-sref="editproduct/{{dataModel.Id}}" class="btn btn-danger">Edit</a>*@
+                        @*<a class="btn btn-primary btn-xs" ui-sref="editproduct">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>*@
+                        <input type="button" class="btn btn-toolbar" value="Edit" ng-click="vm.GetCatelogyByID(dataModel)" /> |
+                        @*<input type="button" class="btn btn-success" value="Details" ng-click="" /> |*@
+                        <input type="button" class="btn btn-warning" style="color:white" value="Delete" ng-click="vm.DeleteCatelogy(dataModel)" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+
+

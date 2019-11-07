@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div ng-app="myapp">
+        <div ng-controller="ProductCtrl as vm">
+            <div ui-view></div>
+            <h3>Update Product</h3>
+            <form novalidate name="frmStudent" id="frmStudent" class="form-horizontal row-border">
+                <br />
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="input17"> Name</label>
+                        <div class="col-md-7"> <input type="text" id="idName" class="form-control" name="nameName" ng-model="vm.proName" /> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="input17"> Price</label>
+                        <div class="col-md-7"> <input type="number" id="idPrice" class="form-control" name="namePrice" ng-model="vm.proPrice" /> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="input17">Description</label>
+                        <div class="col-md-7"> <input type="text" id="idDescription" class="form-control" name="nameDescription" ng-model="vm.proDescription" /> </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="input17"> Note</label>
+                        <div class="col-md-7"> <input type="text" id="idNote" class="form-control" name="nameNote" ng-model="vm.proNote" /> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4"> </div>
+                        <div class="col-md-7">
+                            <span id="save" class="btn btn-success margin-right-btn" @*ui-sref="listproduct"*@ ng-click="vm.SaveUpdate(dataModel)">
+                                <i class="icon-save"></i>{{vm.btnText}}
+                            </span>
+                            <a ui-sref="listproduct" class="btn btn-danger">List Product</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+

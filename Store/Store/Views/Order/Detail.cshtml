@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = null;
+}
+
+<div  ng-controller="OrderController as vm">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand" >Chi Tiết Hoá Đơn</a>
+        </div>
+    </nav>
+    <style>
+        
+    </style>
+     
+    <div class="col-md-1"></div>
+    <div class="col-md-9 well">
+     
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Customer : <select kendo-combo-box
+                                       k-placeholder="'Select Customer'"
+                                       k-data-text-field="'Name'"
+                                       k-data-value-field="'Id'"
+                                       k-filter="'contains'"
+                                       k-auto-bind="false"
+                                       k-data-source="vm.productsDataSource"
+                                       style="width: 20%"
+                                       readonly="" 
+                                       k-value-primitive="true"
+                                       k-ng-model="vm.order.CustomerId">
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label align="right"> Date : <input readonly=""  kendo-date-picker ng-model="vm.order.orderDate" /></label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="male">Address</label>
+                    <input type="text" style="color: black; border-radius: 5px" readonly="" name="address" ng-model="vm.order.CustomerAddress">
+            
+                    <label for="male">Phone Number</label>
+                    <input type="text" style="color: black ; border-radius: 5px; width:155px" readonly="" name="gender" ng-model="vm.order.CustomerPhoneNumber">
+
+
+                </div>
+
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.order.Items">
+                                <td>{{item.ProductName}}</td>
+                                <td>{{item.Quantiy}}</td>
+                                <td>{{item.Price | currency : "" : 0  }} VNĐ </td>
+                                <td>{{item.Quantiy * item.Price| currency : "" : 0  }} VNĐ </td>
+                            </tr>
+                            <tr>
+                               <td style="text-align: right"><b>Quantity :</b></td>
+                                <td >  {{vm.qty()}}</td>
+                                <td style="text-align: right"><b>Total:</b> </td>
+                                <td >{{ vm.getTotal() | currency : "" : 0  }} VNĐ</td>
+                            </tr>
+
+                        </tbody>
+                    </table>          
+                </div>
+
+            </div>
+        </div>
+        </div>
+     </div>
+        
+       
+
+  

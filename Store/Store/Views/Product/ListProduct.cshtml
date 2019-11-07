@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "ListProduct";
+    Layout = null;
+}
+
+<div ng-app="myapp">
+    <div ng-controller="ProductCtrl as vm">
+        @*<div class="container" ng-view></div>
+        <hr />
+        <label>Message Title</label>
+        <input ng-model="msgTitle" placeholder="Title"><br />
+        <label>Message Body</label>
+        <input ng-model="msgBody" placeholder="Body"><br />
+        <label>Message Type</label>
+        <select ng-model="msgType">
+            <option value="success">Success</option>
+            <option value="info">Info</option>
+            <option value="warning">Warning</option>
+            <option value="error">Error</option>
+        </select><br />
+        <hr />
+        <a ng-click="flash.pop({title: msgTitle, body: msgBody, type: msgType})" class="btn">Pop flash up immediately (Growl Style)</a>*@
+        <h4>Danh Sách Sản Phẩm</h4>
+        <hr />
+        <div class="form-group">
+                <div class="col-md-3">
+                    <p>Search: <input type="text" ng-model="customer"></p>
+                </div>
+                <div class="col-md-1">
+                    <input type="button" value="Add Product" class="btn btn-info" ui-sref="CreateProduct" />
+                </div>
+            </div>
+       
+        <table ng-table="vm.tableParams" cellpadding="10" class="table table-bordered table-hover" show-filter="false">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th>Code Product</th>
+                    <th>Name</th>
+                    <th>Price </th>
+                    <th>Decripton</th>
+                    <th>Note</th>
+                    <th>Catelogy</th>
+                    <th>DateCreated</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dataModel in $data | filter: dataModel.Name">
+                    <td>{{dataModel.CodeProduct}}</td>
+                    <td> {{dataModel.Name}}</td>
+                    <td> {{dataModel.Price | currency : "" : 0  }} VNĐ</td>
+                    <td>{{dataModel.Description}}</td>
+                    <td>{{dataModel.Note}}</td>
+                    <td>{{dataModel.CatelogyName}}</td>
+                    <td>{{dataModel.DateCreated | date:'M/d/yyyy ' }}</td>
+                    <td>
+                        @*<a ui-sref="editproduct/{{dataModel.Id}}" class="btn btn-danger">Edit</a>*@
+                        @*<a class="btn btn-primary btn-xs" ui-sref="editproduct">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>*@
+                        <input type="button" class="btn btn-toolbar" value="Edit" ng-click="vm.going(dataModel)" /> |
+                        @*<input type="button" class="btn btn-success" value="Details" ng-click="" /> |*@
+                        <input type="button" class="btn btn-warning" style="color:white" value="Delete" ng-click="vm.DeleteProduct(dataModel)" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+
+

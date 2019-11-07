@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "CreateProduct";
+    Layout = null;
+}
+
+<div ng-app="myapp">
+    <div ng-controller="ProductCtrl as vm">
+        <h2>{{vm.header}}</h2>
+        <form novalidate name="frmStudent" id="frmStudent" class="form-horizontal row-border">
+            <br />
+            <div class="col-md-8">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> Name</label>
+                    <div class="col-md-7"> <input type="text" id="idName" class="form-control" name="nameName" ng-model="vm.product.Name" /> </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> Price</label>
+                    <div class="col-md-7"> <input type="number" id="idPrice" class="form-control" name="namePrice" ng-model="vm.product.Price" /> </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17">Catelogy</label>
+                    <div class="col-md-7">
+                        <select kendo-combo-box
+                                k-placeholder="'Select product'"
+                                k-data-text-field="'Name'"
+                                k-data-value-field="'Id'"
+                                k-filter="'contains'"
+                                k-auto-bind="false"
+                                k-data-source="vm.productsDataSource"
+                                k-ng-model="vm.product.CatelogyID"
+                                k-value-primitive="true"
+                                style="width: 60%">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17">Description</label>
+                    <div class="col-md-7"> <input type="text" id="idDescription" class="form-control" name="nameDescription" ng-model="vm.product.Description" /> </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> Note</label>
+                    <div class="col-md-7"> <input type="text" id="idNote" class="form-control" name="nameNote" ng-model="vm.product.Note" /> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"> </div>
+                    <div class="col-md-7">
+                        <span id="save" class="btn btn-success margin-right-btn" @*ui-sref="listproduct"*@ ng-click="vm.SaveUpdate()">
+                            <i class="icon-save"></i>{{vm.btnText}}
+                        </span>
+                        <a class="btn btn-danger" ng-click="vm.Clear()">Clear</a>
+                        <a ui-sref="listproduct" class="btn btn-default">List    Product</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+
+
+
+

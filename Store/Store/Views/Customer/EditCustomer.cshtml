@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "EditCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditCustomer</h2>
+
+<hr />
+<form role="form" style="max-width: 500px;">
+    <strong class="error">{{ error }}</strong>
+    <div class="form-group">
+        <label for="firstname">
+          Name
+        </label>
+        <input type="text" class="form-control" id="firstname" ng-model="Name" />
+    </div>
+    <div class="form-group">
+        <label for="Address">
+            Address
+        </label>
+        <input type="text" class="form-control" id="Address" ng-model="Address" />
+    </div>
+    <div class="form-group">
+        <label for="DOB">
+            Date
+        </label>
+        <input type="date" class="form-control" id="DOB" ng-model="DOB" />
+    </div>
+    <a ui-view="listcustomer" class="btn btn-info">Back to List</a>
+    <button type="submit" class="btn btn-default" ng-click="save()">
+        Submit
+    </button>
+</form>
+<<div ui-view></div>
+

@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "ListOrder";
+    Layout = null;
+}
+    <head>
+        <style>
+            .contact-info-form {
+                list-style-type: none;
+                margin: 30px 0;
+                padding: 0;
+            }
+
+                .contact-info-form li {
+                    margin: 10px 0;
+                }
+
+                .contact-info-form label {
+                    display: inline-block;
+                    width: 100px;
+                    text-align: right;
+                    font-weight: bold;
+                }
+        </style>
+    </head>
+<div>
+    <div ng-controller="OrderDetailCtrl as vm">
+        <div>
+            @*<kendo-grid options="mainGridOptions">
+                
+                <div k-detail-template>
+                    <td>
+                        <input type="button" class="btn btn-toolbar" value="Edit" ng-click="going(response.data.Id)" /> |
+                        <input type="button" class="btn btn-success" value="details" ng-click="" /> |
+                        <input type="button" class="btn btn-warning" style="color:white" value="Delete" ng-click="vm.DeleteOrder(dataModel);" />
+                    </td>
+                    <kendo-tabstrip>
+
+                        <ul>
+                            <li class="k-state-active">Orders</li>
+                            <li>Thông Tin Khách Hàng</li>
+                        </ul>
+                        <div>
+                            <div kendo-grid k-options="detailGridOptions(dataItem)"></div>
+                        </div>
+                        <div>
+                            <ul class="contact-info-form">
+                                <li><label>Country:</label> <input class="k-textbox" ng-model="dataItem.Country" /></li>
+                    <li><label>City:</label> <input class="k-textbox" ng-model="dataItem.City" /></li>
+                                <li><label>Name:</label> {{dataItem.CustomerName}}</li>
+                                <li><label>Phone:</label> {{dataItem.CustomerPhoneNumber}}</li>
+                                <li><label>Address:</label> {{dataItem.CustomerAddress}}</li>
+                            </ul>
+                        </div>
+                    </kendo-tabstrip>
+                </div>
+            </kendo-grid>*@
+
+        </div>
+        <form novalidate name="frmStudent" id="frmStudent" class="form-horizontal row-border">
+            <div class="col-md-12">
+                <h3>
+                    Danh Sách Hoá Đơn
+                </h3>
+
+                @*<a class="btn btn-danger" ui-sref="createorder">Create Order</a>*@
+                <input type="button" class="btn btn-primary" value="Create Order" ng-click="add()" />
+                <hr />
+                <p>Search: <input type="text" ng-model="Name" placeholder="Name"></p>
+
+                <table ng-table="vm.tableParams" cellpadding="10" class="table table-bordered table-hover">
+                    <thead class="grid-top-panel">
+                        <tr>
+                            <td>
+                                <b>STT</b>
+                            </td>
+                            <td>
+                                <b>Customer Name</b>
+                            </td>
+                            <td>
+                                <b>Order Date</b>
+                            </td>
+                            <td>
+                                <b>Total Quantity</b>
+                            </td>
+                            <td>
+                                <b>Total Amount</b>
+                            </td>
+                            <td>
+                                <b>Action</b>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dataModel in vm.orders| filter:Name">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td>
+                                {{dataModel.CustomerName}}
+                            </td>
+                            <td>
+                                {{dataModel.orderDate |date:'M/d/yyyy '}}
+                            </td>
+                            <td>
+                                {{dataModel.OrderNumber}}
+                            </td>
+                            <td>
+                                {{dataModel.TotalAmount| currency : "" : 0  }} VNĐ
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-toolbar" value="Edit" ng-click="going(dataModel)" /> |
+                                <input type="button" class="btn btn-success" value="Details" ng-click="detaiOrder(dataModel)" /> |
+                                <input type="button" class="btn btn-warning" style="color:white" value="Delete" ng-click="vm.DeleteOrder(dataModel);" />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div ui-view></div>

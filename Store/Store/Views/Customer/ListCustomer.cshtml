@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "ListCustomer";
+    Layout = null;
+}
+<h2>Danh Sách Khách Hàng</h2>
+<div ng-app="myapp">
+    <div ng-controller="CustomerCtrl as vm">
+        <form novalidate name="frmProduct" id="frmProduct" class="form-horizontal row-border">
+            <hr />
+            <div ng-view></div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <p>Search: <input type="text" ng-model="customer"></p>  
+                </div>
+                <div class="col-md-1">
+
+                    <input type="button" value="Add Customer" class="btn btn-info" data-target="#AddNew" data-toggle="modal" />
+                </div>
+            </div>
+            <hr />
+            <table ng-table="vm.tableParams" cellpadding="10" class="table table-bordered table-hover" show-filter="false">
+                <thead class="grid-top-panel">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Address </th>
+                        <th>PhoneNumber</th>
+                        <th>Date Created</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in vm.customers | filter: customer">
+                        <td title="'ID'" filter="{ name: 'text'}" sortable="'Id'">
+                            {{$index + 1}}
+                        </td>
+                        <td title="'Name'" filter="{ name: 'text'}" sortable="'Name'">
+                            {{dataModel.Name}}
+                        </td>
+                        <td title="'Address'" filter="{ age: 'number'}" sortable="'Address'">
+                            {{dataModel.Address}}
+                        </td>
+                        <td title="'PhoneNumber'" filter="{ age: 'number'}" sortable="'PhoneNumber'">
+                            {{dataModel.PhoneNumber}}
+                        </td>
+                        <td title="'DOB'" filter="{ age: 'number'}" sortable="'DOB'">
+                            {{dataModel.DOB | date:'yyyy-MM-dd'}}
+                        </td>
+                        <td title="'Action'">
+                            <input type="button" value="Edit" class="btn btn-danger" data-target="#AddNew" data-toggle="modal" ng-click="vm.GetCustomerByID(dataModel)" /> |
+                            @*<input type="button" class="btn btn-success" value="Details" ng-click="" />*@
+                            <input type="button" class="btn btn-warning" style="color:white" value="Delete" ng-click="vm.DeleteCustomer(dataModel)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+        </form>
+        <div class="modal" id="AddNew" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="vm.Clear()">&times;</button>
+                        @*<h3 class="text-info">Add Customer</h3>*@
+                    <h3 class="text-info">{{vm.titleModal}}</h3>
+                    </div>
+                    <div class="modal-body" style="margin-left:20px">
+                        @*Add New Employee form starts here...*@
+                        <form class="form-horizontal" name="AddNewForm">
+                            <div class="form-group">
+                                <label class="control-label"> Customer Name</label>
+                                <input class="form-control" name="productName" ng-model="vm.Name" type="text" placeholder="Name" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Address</label>
+                                <input class="form-control" name="productPrice" ng-model="vm.Address" type="text" placeholder="Address" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">PhoneNumber</label><br />
+                                @*<input class="form-control" name="PhoneNumber" ng-model="vm.PhoneNumber" type="text" placeholder="PhoneNumber" />*@
+                                <input kendo-masked-text-box ng-model="vm.PhoneNumber" 
+                                       k-mask="'(999) 000-0000'" />
+                            </div>
+                        </form> 
+                    </div>
+                    <div class="modal-footer">
+                        <span id="save" class="btn btn-success margin-right-btn" @*ui-sref="listproduct"*@ ng-click="vm.SaveUpdate()">
+                            <i class="icon-save"></i>{{vm.btnText}}
+                        </span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.Clear()">Close</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
